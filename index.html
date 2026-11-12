@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Word Classes Study List</title>
+<meta name="theme-color" content="#0F766E">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icon-192.png">
+<link rel="apple-touch-icon" href="icon-192.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<style>
+:root{
+  color-scheme: light dark;
+  --bg:#F3F6F8; --card:#FFFFFF; --ink:#14233A; --muted:#5B6B80; --line:#D6DEE6;
+  --accent:#0F766E; --accent-ink:#FFFFFF; --soft:#E3F1EF;
+  --font:"Noto Sans Bengali","Kalpurush","Nirmala UI","Hind Siliguri",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+}
+@media (prefers-color-scheme: dark){
+  :root{ --bg:#0E1621; --card:#162231; --ink:#E6EDF5; --muted:#93A3B8; --line:#26364A; --accent:#34D1BF; --accent-ink:#06211E; --soft:#12332F; }
+}
+*{box-sizing:border-box}
+html{ -webkit-text-size-adjust:100%; }
+body{
+  margin:0; background:var(--bg); color:var(--ink); font-family:var(--font); line-height:1.55;
+  padding:env(safe-area-inset-top,0) env(safe-area-inset-right,0) env(safe-area-inset-bottom,0) env(safe-area-inset-left,0);
+}
+.wrap{max-width:720px; margin:0 auto; padding:20px 16px 56px}
+header h1{font-size:1.7rem; line-height:1.2; margin:8px 0 4px; letter-spacing:-.01em}
+header p{margin:0; color:var(--muted)}
+.overall{margin:18px 0 0; background:var(--card); border:1px solid var(--line); border-radius:14px; padding:14px 16px}
+.overall-top{display:flex; justify-content:space-between; align-items:baseline; gap:8px}
+.overall-top strong{font-size:1.5rem}
+.overall-top span{color:var(--muted); font-size:.95rem}
+.bar{height:10px; background:var(--line); border-radius:99px; overflow:hidden; margin-top:10px}
+.bar > i{display:block; height:100%; width:0; background:var(--accent); border-radius:99px; transition:width .25s}
+.tools{position:sticky; top:0; z-index:5; background:var(--bg); padding:12px 0 10px; margin-top:6px;
+  display:flex; flex-wrap:wrap; gap:8px; align-items:center}
+.tools::before{content:""; position:absolute; left:0; right:0; top:calc(-1 * env(safe-area-inset-top,0px)); height:env(safe-area-inset-top,0px); background:var(--bg)}
+.chip,.btn{
+  font:inherit; font-size:.92rem; border:1px solid var(--line); background:var(--card); color:var(--ink);
+  padding:8px 14px; border-radius:99px; cursor:pointer; min-height:40px;
+}
+.chip[aria-pressed="true"]{background:var(--accent); color:var(--accent-ink); border-color:var(--accent)}
+.btn.install{background:var(--accent); color:var(--accent-ink); border-color:var(--accent)}
+.spacer{flex:1}
+.part{margin:26px 0 8px}
+.part h2{font-size:1.15rem; margin:0}
+.part small{color:var(--muted); font-size:.95rem}
+details.chapter{background:var(--card); border:1px solid var(--line); border-radius:14px; margin:10px 0; overflow:hidden}
+details.chapter > summary{
+  list-style:none; cursor:pointer; padding:14px 16px; display:grid; grid-template-columns:1fr auto; gap:2px 12px; align-items:center;
+}
+details.chapter > summary::-webkit-details-marker{display:none}
+.ch-name{font-weight:700}
+.ch-name em{font-style:normal; font-weight:400; color:var(--muted); margin-left:6px}
+.ch-count{font-weight:700; color:var(--accent)}
+.ch-bar{grid-column:1 / -1; height:5px; background:var(--line); border-radius:99px; overflow:hidden; margin-top:8px}
+.ch-bar > i{display:block; height:100%; width:0; background:var(--accent); transition:width .25s}
+details.chapter.done > summary .ch-count::after{content:" ✓"}
+.body{border-top:1px solid var(--line); padding:6px 6px 10px}
+.row-tools{display:flex; justify-content:flex-end; padding:4px 10px}
+.btn.small{min-height:34px; padding:5px 12px; font-size:.85rem}
+ul{list-style:none; margin:0; padding:0}
+li.item label{display:flex; gap:12px; align-items:flex-start; padding:11px 10px; border-radius:10px; cursor:pointer}
+li.item label:active{background:var(--soft)}
+li.item input{
+  appearance:none; -webkit-appearance:none; flex:none; width:24px; height:24px; margin:1px 0 0;
+  border:2px solid var(--muted); border-radius:7px; background:transparent; display:grid; place-content:center; cursor:pointer;
+}
+li.item input::after{
+  content:""; width:12px; height:6px; border-left:3px solid var(--accent-ink); border-bottom:3px solid var(--accent-ink);
+  transform:rotate(-45deg) translate(1px,-1px); opacity:0;
+}
+li.item input:checked{background:var(--accent); border-color:var(--accent)}
+li.item input:checked::after{opacity:1}
+li.item input:focus-visible,.chip:focus-visible,.btn:focus-visible,summary:focus-visible{outline:3px solid var(--accent); outline-offset:2px}
+.txt{display:block}
+.hint{display:block; color:var(--muted); font-size:.9rem}
+li.item.checked .name{color:var(--muted); text-decoration:line-through; text-decoration-color:var(--line)}
+li.item.hide{display:none}
+li.group{padding:10px 10px 2px; font-weight:600; font-size:.95rem}
+li.group + li.item, ul.sub{padding-left:0}
+li.sub label{padding-left:30px}
+.note{margin:6px 12px 10px; padding:10px 12px; background:var(--soft); border-radius:10px; font-size:.92rem}
+.empty{display:none; text-align:center; color:var(--muted); padding:32px 8px}
+.rule{margin-top:30px; color:var(--muted); font-size:.92rem; border-top:1px solid var(--line); padding-top:14px}
+@media (prefers-reduced-motion: reduce){ *{transition:none !important} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>English Grammar: Word Classes</h1>
+    <p>যেটা শিখেছো সেটা টিক দাও। অগ্রগতি এই ডিভাইসে সেভ থাকবে।</p>
+    <div class="overall" aria-live="polite">
+      <div class="overall-top"><strong id="pct">0%</strong><span id="total">0 / 0 শেখা হয়েছে</span></div>
+      <div class="bar"><i id="totalBar"></i></div>
+    </div>
+  </header>
+
+  <div class="tools" role="group" aria-label="ফিল্টার">
+    <button class="chip" data-f="all" aria-pressed="true">সব</button>
+    <button class="chip" data-f="todo" aria-pressed="false">বাকি</button>
+    <button class="chip" data-f="done" aria-pressed="false">শেখা</button>
+    <span class="spacer"></span>
+    <button class="btn install" id="installBtn" hidden>Install</button>
+    <button class="btn" id="resetBtn">সব রিসেট</button>
+  </div>
+
+  <main id="app"></main>
+  <p class="empty" id="empty">এই ফিল্টারে কোনো আইটেম নেই।</p>
+
+  <p class="rule"><strong>অধ্যয়নের নিয়ম:</strong> একটি অধ্যায়ের গুরুত্বপূর্ণ বিষয়গুলো বুঝে এবং অনুশীলনে দক্ষতা অর্জন করে তারপর পরবর্তী অধ্যায়ে যাবে।</p>
+</div>
+
+<script>
+const DATA = [
+ {title:'A. Open Word Classes', bn:'মুক্ত শব্দশ্রেণি', chapters:[
+  {name:'Nouns', bn:'বিশেষ্য', items:['Common Nouns','Proper Nouns','Concrete Nouns','Abstract Nouns','Countable Nouns','Uncountable Nouns','Collective Nouns','Material Nouns','Compound Nouns']},
+  {name:'Main Verbs / Lexical Verbs', bn:'প্রধান ক্রিয়া', items:['Action Verbs','Stative Verbs','Linking Verbs','Transitive Verbs','Intransitive Verbs','Ditransitive Verbs','Regular Verbs','Irregular Verbs','Phrasal Verbs','Prepositional Verbs','Phrasal-Prepositional Verbs']},
+  {name:'Adjectives', bn:'বিশেষণ', items:['Descriptive / Qualitative Adjectives','Classifying Adjectives','Participial Adjectives','Compound Adjectives','Gradable Adjectives','Non-gradable Adjectives','Comparative Adjectives','Superlative Adjectives']},
+  {name:'Adverbs', bn:'ক্রিয়া-বিশেষণ', items:['Adverbs of Manner','Adverbs of Place','Adverbs of Time','Adverbs of Frequency','Adverbs of Degree','Focusing Adverbs','Sentence / Comment Adverbs','Viewpoint Adverbs','Linking / Conjunctive Adverbs']}
+ ]},
+ {title:'B. Closed Word Classes', bn:'সীমাবদ্ধ শব্দশ্রেণি', chapters:[
+  {name:'Determiners', bn:'নির্ধারক', items:['Articles','Demonstratives','Possessive Determiners','Quantifiers','Distributives','Numbers / Numerals','Interrogative Determiners','Other Determiners']},
+  {name:'Pronouns', bn:'সর্বনাম', items:['Personal Pronouns','Possessive Pronouns','Reflexive Pronouns','Intensive / Emphatic Pronouns','Demonstrative Pronouns','Interrogative Pronouns','Relative Pronouns','Indefinite Pronouns','Reciprocal Pronouns']},
+  {name:'Prepositions', bn:'পদান্বয়ী অব্যয়', items:['Prepositions of Time','Prepositions of Place / Position','Prepositions of Direction / Movement','Prepositions of Manner','Prepositions of Means / Instrument','Prepositions of Agent','Prepositions of Cause / Reason','Prepositions of Purpose','Prepositions of Measure / Rate / Quantity','Prepositions of Source','Prepositions of Topic / Reference']},
+  {name:'Conjunctions', bn:'সংযোজক', items:['Coordinating Conjunctions','Subordinating Conjunctions','Correlative Conjunctions']},
+  {name:'Auxiliary Verbs', bn:'সাহায্যকারী ক্রিয়া', items:['Primary Auxiliary Verbs','Modal Auxiliary Verbs']},
+  {name:'Particles', bn:'পার্টিকল', items:[['Infinitive Particle','to'],['Phrasal-Verb Particles','up, off, out, away, back, etc.'],['Negative Particle','not']]}
+ ]},
+ {title:'C. Other / Special Word Classes', bn:'বিশেষ শব্দশ্রেণি', chapters:[
+  {name:'Interjections', bn:'আবেগসূচক শব্দ', items:[['Joy','Hurray!, Yay!'],['Surprise','Oh!, Wow!'],['Sadness','Alas!, Oh no!'],['Pain','Ouch!'],['Greeting / Attention','Hello!, Hey!'],['Disgust','Ugh!, Yuck!']]},
+  {name:'Question Words', bn:'প্রশ্নবাচক শব্দ', note:'Question Words আলাদা একটি স্বতন্ত্র Word Class নয়। বাক্যে কাজ অনুযায়ী এগুলো বিভিন্ন শ্রেণির অন্তর্ভুক্ত হয়।',
+   items:[['Interrogative Pronouns','Who, Whom, Whose, What'],['Interrogative Determiners','Which, What, Whose'],['Interrogative Adverbs','When, Where, Why, How']]}
+ ]}
+];
+
+const KEY = 'word-classes-checked-v1';
+let checked = {};
+try { checked = JSON.parse(localStorage.getItem(KEY) || '{}') || {}; } catch (e) { checked = {}; }
+const save = () => { try { localStorage.setItem(KEY, JSON.stringify(checked)); } catch (e) {} };
+const bn = (n) => String(n);
+const esc = (s) => s.replace(/[&<>]/g, (c) => ({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
+
+let uid = 0, filter = 'all';
+const chapters = []; // {el, ids:[]}
+
+function itemHTML(it, id, sub){
+  const name = Array.isArray(it) ? it[0] : it;
+  const hint = Array.isArray(it) ? it[1] : '';
+  return `<li class="item${sub ? ' sub' : ''}" data-id="${id}"><label>
+    <input type="checkbox" data-id="${id}">
+    <span class="txt"><span class="name">${esc(name)}</span>${hint ? `<span class="hint">${esc(hint)}</span>` : ''}</span>
+  </label></li>`;
+}
+
+function build(){
+  const app = document.getElementById('app');
+  let html = '';
+  DATA.forEach((part) => {
+    html += `<div class="part"><h2>${esc(part.title)}</h2><small>${esc(part.bn)}</small></div>`;
+    part.chapters.forEach((ch) => {
+      const ids = [];
+      let list = '';
+      ch.items.forEach((it) => {
+        if (it && it.g) {
+          list += `<li class="group">${esc(it.g)}</li>`;
+          it.c.forEach((c) => { const id = 'i' + (uid++); ids.push(id); list += itemHTML(c, id, true); });
+        } else {
+          const id = 'i' + (uid++); ids.push(id); list += itemHTML(it, id, false);
+        }
+      });
+      const cid = chapters.length;
+      chapters.push({ ids });
+      html += `<details class="chapter" data-c="${cid}">
+        <summary>
+          <span class="ch-name">${esc(ch.name)}<em>${esc(ch.bn)}</em></span>
+          <span class="ch-count"></span>
+          <span class="ch-bar"><i></i></span>
+        </summary>
+        <div class="body">
+          ${ch.note ? `<p class="note">${esc(ch.note)}</p>` : ''}
+          <div class="row-tools"><button class="btn small" data-all="${cid}"></button></div>
+          <ul>${list}</ul>
+        </div>
+      </details>`;
+    });
+  });
+  app.innerHTML = html;
+  app.querySelectorAll('details.chapter').forEach((d, i) => { chapters[i].el = d; });
+}
+
+function refresh(){
+  let done = 0, total = 0;
+  chapters.forEach((c) => {
+    const n = c.ids.filter((id) => checked[id]).length;
+    done += n; total += c.ids.length;
+    c.el.querySelector('.ch-count').textContent = bn(n) + ' / ' + bn(c.ids.length);
+    c.el.querySelector('.ch-bar i').style.width = (n / c.ids.length * 100) + '%';
+    c.el.classList.toggle('done', n === c.ids.length);
+    c.el.querySelector('[data-all]').textContent = n === c.ids.length ? 'সব টিক সরাও' : 'সব টিক দাও';
+  });
+  const pct = total ? Math.round(done / total * 100) : 0;
+  document.getElementById('pct').textContent = bn(pct) + '%';
+  document.getElementById('total').textContent = bn(done) + ' / ' + bn(total) + ' শেখা হয়েছে';
+  document.getElementById('totalBar').style.width = pct + '%';
+  applyFilter();
+}
+
+function applyFilter(){
+  let visible = 0;
+  document.querySelectorAll('li.item').forEach((li) => {
+    const on = !!checked[li.dataset.id];
+    li.classList.toggle('checked', on);
+    li.querySelector('input').checked = on;
+    const show = filter === 'all' || (filter === 'done' ? on : !on);
+    li.classList.toggle('hide', !show);
+    if (show) visible++;
+  });
+  document.querySelectorAll('li.group').forEach((g) => {
+    let n = g.nextElementSibling, any = false;
+    while (n && n.classList.contains('item')) { if (!n.classList.contains('hide')) any = true; n = n.nextElementSibling; }
+    g.classList.toggle('hide', !any);
+    g.style.display = any ? '' : 'none';
+  });
+  chapters.forEach((c) => {
+    const any = c.ids.some((id) => {
+      const on = !!checked[id];
+      return filter === 'all' || (filter === 'done' ? on : !on);
+    });
+    c.el.style.display = any ? '' : 'none';
+  });
+  document.getElementById('empty').style.display = visible ? 'none' : 'block';
+}
+
+document.addEventListener('change', (e) => {
+  const id = e.target.dataset && e.target.dataset.id;
+  if (!id) return;
+  if (e.target.checked) checked[id] = 1; else delete checked[id];
+  save(); refresh();
+});
+
+document.addEventListener('click', (e) => {
+  const all = e.target.closest('[data-all]');
+  if (all) {
+    e.preventDefault();
+    const c = chapters[+all.dataset.all];
+    const allOn = c.ids.every((id) => checked[id]);
+    c.ids.forEach((id) => { if (allOn) delete checked[id]; else checked[id] = 1; });
+    save(); refresh(); return;
+  }
+  const chip = e.target.closest('.chip');
+  if (chip) {
+    filter = chip.dataset.f;
+    document.querySelectorAll('.chip').forEach((b) => b.setAttribute('aria-pressed', b === chip));
+    applyFilter();
+  }
+});
+
+document.getElementById('resetBtn').addEventListener('click', () => {
+  if (confirm('সব টিক মুছে ফেলবে?')) { checked = {}; save(); refresh(); }
+});
+
+// Install button
+let deferred = null;
+window.addEventListener('beforeinstallprompt', (e) => {
+  e.preventDefault(); deferred = e;
+  document.getElementById('installBtn').hidden = false;
+});
+document.getElementById('installBtn').addEventListener('click', async () => {
+  if (!deferred) return;
+  deferred.prompt(); await deferred.userChoice; deferred = null;
+  document.getElementById('installBtn').hidden = true;
+});
+window.addEventListener('appinstalled', () => { document.getElementById('installBtn').hidden = true; });
+
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => { navigator.serviceWorker.register('sw.js').catch(() => {}); });
+}
+
+build();
+refresh();
+</script>
+</body>
+</html>

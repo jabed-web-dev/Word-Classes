@@ -1,0 +1,16 @@
+{
+  "name": "Word Classes Study List",
+  "short_name": "Word Classes",
+  "description": "English Grammar Word Classes চেকলিস্ট — যা শিখেছো টিক দাও",
+  "lang": "bn",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#F3F6F8",
+  "theme_color": "#0F766E",
+  "icons": [
+    { "src": "icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any maskable" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
+  ]
+}
